@@ -3,6 +3,7 @@ const isProd = process.env.NODE_ENV == "production";
 const password = process.env.POSTER_PASSWORD;
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
