@@ -4,8 +4,8 @@ const password = process.env.POSTER_PASSWORD;
 
 const express = require("express");
 const app = express();
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
 
 const port = 5591;
@@ -29,10 +29,10 @@ app.post("/message", function (req, res) {
   res.sendStatus(200);
 });
 
-io.on("connection", function () {
-  console.log("connected");
+server.listen(port, function () {
+  console.log(`Listening on ${port}`);
 });
 
-http.listen(port, function () {
-  console.log("Listening on " + port);
+io.on("connection", function () {
+  console.log("connected");
 });
