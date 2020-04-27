@@ -34,5 +34,5 @@ server.listen(port, function () {
 });
 
 io.on("connection", function () {
-  console.log("connected");
+  io.emit("message", "connected");
 });

@@ -1,5 +1,5 @@
 const messages = document.querySelector(".messages");
-const socket = io();
+const socket = io.connect("http://localhost:5591");
 
 socket.on("message", function (data) {
   addMessage(data);
