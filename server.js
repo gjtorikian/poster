@@ -29,7 +29,9 @@ app.post("/message", function (req, res) {
   res.sendStatus(200);
 });
 
-io.on("connection", function () {});
+io.on("connection", function () {
+  console.log("connected");
+});
 
 http.listen(port, function () {
   console.log("Listening on " + port);
