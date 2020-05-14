@@ -8,6 +8,7 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
+const timingSafeEqual = require("crypto").timingSafeEqual;
 
 const port = 5591;
 
@@ -17,6 +18,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", function (req, res) {
+  let password = Buffer.from(req.query.password || "");
+  if (password.length == 0 || !timingSafeEqual(password, password)) {
+    return res.sendStatus(404);
+  }
+
   res.sendFile(__dirname + "/index.html");
 });
 
