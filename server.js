@@ -1,6 +1,6 @@
 const path = require("path");
 const isProd = process.env.NODE_ENV == "production";
-const password = process.env.POSTER_PASSWORD;
+const posterPassword = Buffer.from(process.env.POSTER_PASSWORD || "");
 
 const express = require("express");
 const cors = require("cors");
@@ -19,7 +19,7 @@ app.use(cors());
 
 app.get("/", function (req, res) {
   let password = Buffer.from(req.query.password || "");
-  if (password.length == 0 || !timingSafeEqual(password, password)) {
+  if (!timingSafeEqual(password, posterPassword)) {
     return res.sendStatus(404);
   }
 
@@ -29,8 +29,10 @@ app.get("/", function (req, res) {
 app.post("/message", function (req, res) {
   let body = req.body;
   let message = body.message;
+  let password = Buffer.from(req.headers.authorization || "");
+
   if (isProd) {
-    if (password != req.headers.authorization) {
+    if (!timingSafeEqual(password, posterPassword)) {
       return res.sendStatus(404);
     }
   }
