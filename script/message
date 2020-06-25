@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"time": "now", "message":"testing", "signal": "true"}' \
+  http://localhost:5591/message

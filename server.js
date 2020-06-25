@@ -28,7 +28,8 @@ app.get("/", function (req, res) {
 
 app.post("/message", function (req, res) {
   let body = req.body;
-  let message = body.message;
+  let message = `(${body.time}) ${body.message}`;
+  let signal = body.signal === "true";
   let password = Buffer.from(req.headers.authorization || "");
 
   if (isProd) {
@@ -36,7 +37,7 @@ app.post("/message", function (req, res) {
       return res.sendStatus(404);
     }
   }
-  io.emit("message", message);
+  io.emit("message", message, signal);
   res.sendStatus(200);
 });
 
