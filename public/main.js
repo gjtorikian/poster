@@ -1,6 +1,8 @@
 const messages = document.querySelector(".messages");
 const socket = io.connect("http://localhost:5591");
 
+const muted = document.getElementById("muted");
+
 const ding = () => {
   // noinspection JSUnresolvedVariable
   let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -23,7 +25,7 @@ const ding = () => {
 
 socket.on("message", function (message, signal) {
   addMessage(message);
-  if (signal) {
+  if (signal && !muted.checked) {
     ding();
   }
 });

@@ -6,10 +6,14 @@
       name="viewport"
       content="width=device-width,minimum-scale=1,initial-scale=1"
     />
-    <link href="./main.css" />
+    <link href="main.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
   </head>
   <body>
+    <div class="header">
+      <input type="checkbox" id="muted" name="muted" value="Bike" />
+      <label for="muted"> Muted</label><br />
+    </div>
     <ol class="messages"></ol>
     <script src="./main.js"></script>
   </body>
