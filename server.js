@@ -29,7 +29,7 @@ app.get("/", function (req, res) {
 app.post("/message", function (req, res) {
   let body = req.body;
   let message = `(${body.time}) ${body.message}`;
-  let signal = body.signal === "true";
+  let signal = body.signal == true;
   let password = Buffer.from(req.headers.authorization || "");
 
   if (isProd) {
